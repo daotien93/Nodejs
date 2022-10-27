@@ -1,18 +1,14 @@
-const express = require("express");
-// Create an express
+const express = require('express');
 const app = express();
-const path = require("path");
-const hbs = require("hbs");
-
-app.set("view engine", "hbs");
-app.set("views", path.join(__dirname,"/views"));
-app.get("/", (req, res) => { 
-    res.render("index", {    
-        author: "Arash Arora", 
-    });
+const port = 3000;
+const router = require('./apiRouter.js');
+// Define path
+router.get('/', (req, res, next ) => {
+    res.json('Home');
 });
-// Start port 3000
+
+app.use('/api/v1', router);
+
 app.listen(3000, () => {
-    console.log("Server running on port 3000");
+    console.log(`Server running on port ${port}`);
 });
-
